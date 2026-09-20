@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from "express"
 import {router} from "./routes/auth.js"
 import {createClient} from "redis"

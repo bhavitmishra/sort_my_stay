@@ -3,7 +3,7 @@ import {client} from "../server.js"
 const key = process.env.RESEND_API_KEY;
 const resend = new Resend(key);
 
-export default async function sendOtp(email : any) {
+export default async function sendOtp(email : any , name : any) {
 
 	        const otp = Math.floor(100000 +  Math.random()*900000).toString();
 		const {data , error} = await resend.emails.send({
@@ -20,6 +20,15 @@ export default async function sendOtp(email : any) {
 
 console.log("Email sent successfully!");
 console.log("Email ID:", data?.id);
-	await client.set(`${email}` , `${otp}` , {EX : 300});
+	await client.set(
+  `signup:${email}`,
+  JSON.stringify({
+    otp,
+    name,
+  }),
+  {
+    EX: 300,
+  }
+);
 }
 
