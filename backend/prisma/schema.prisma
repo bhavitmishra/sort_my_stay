@@ -12,7 +12,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model Managers{
+model Manager{
   id              String   @id @default(uuid())
   name            String?
   email           String   @unique
@@ -25,7 +25,7 @@ model Managers{
   listings        Listing[]
 }
 
-model Event {
+model Listing {
   id            String           @id @default(uuid())
   name          String
   managerId   String
